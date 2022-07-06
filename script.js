@@ -48,20 +48,28 @@ return response.json();
     console.log(data);
     // APPEND TO PAGE   
 var weatherCard = document.createElement('div')
-weatherCard.setAttribute('class','card')
+weatherCard.setAttribute('class','card1')
 var searchValue = document.createElement('h2')
 searchValue.textContent=document.getElementById('search-value').value
 var currentDate = document.createElement('h3')
 currentDate.textContent=moment.unix(data.current.dt).format('(MM/DD/YYYY')
 
 var currentTemp = document.createElement('h3')
-currentTemp.textContent='temp:' + data.current.temp
+currentTemp.textContent='temp:' + data.current.temp +'°F'
 
+var currentWind = document.createElement('h3')
+currentWind.textContent='wind' + data.current.wind_speed + ' MPH'
+
+var humidity = document.createElement('h3')
+humidity.textContent='humidity' + data.current.humidity + ' %'
+
+var currentUv = document.createElement('h3')
+currentUv.textContent='UV Index' +data.current.uvi
    
     
 
 
-weatherCard.append(searchValue,currentDate,currentTemp)
+weatherCard.append(searchValue,currentDate,currentTemp,currentWind,humidity,currentUv)
     document.getElementById('todayweather').append(weatherCard)
 })
 };
@@ -75,21 +83,27 @@ function fiveDayForcast(lat,lon){
     }).then(function(data){
         console.log(data);
 
-for(var i = 0; i < data.daily.length-3; i++){
+for(var i = 1; i < data.daily.length-2; i++){
     var weatherCard = document.createElement('div')
     weatherCard.setAttribute('class','card')
     
     var currentDate = document.createElement('h3')
     currentDate.textContent=moment.unix(data.daily[i].dt).format('(MM/DD/YYYY')
     
-    var currentTemp = document.createElement('p')
-    currentTemp.textContent='temp:' + data.daily[i].temp.day
+    var currentTemp = document.createElement('h4')
+    currentTemp.textContent='temp:' + data.daily[i].temp.day + ' °F'
+
+    var currentWind = document.createElement('h4')
+    currentWind.textContent='Wind:' + data.daily[i].wind_speed +' MPH'
+
+    var humidity = document.createElement('h4')
+    humidity.textContent='Humidity:' + data.daily[i].humidity+ ' %'
     
        
         
     
     
-    weatherCard.append(currentDate,currentTemp)
+    weatherCard.append(currentDate,currentTemp,currentWind,humidity)
         document.getElementById('fiveforecast').append(weatherCard)
 
 
@@ -97,7 +111,7 @@ for(var i = 0; i < data.daily.length-3; i++){
 
 
 
-        // APPEND TO PAGE   
+          
     
     })
     };
