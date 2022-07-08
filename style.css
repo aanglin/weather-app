@@ -14,3 +14,10 @@ color: white;
  
 
 }
+
+#list-group{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+font-size: xx-large;
+}

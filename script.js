@@ -17,11 +17,17 @@ var geoAPIurl=`http://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limi
 // Value from search form
 var lat;
 var lon;
+var searchValue;
+var savedButton = document.getElementById('#search-button');
 $('#search-button').on('click', function(){
-    var searchValue = $('#search-value').val()
-    console.log(searchValue)
+     searchValue = $('#search-value').val()
+     console.log(searchValue)
      getLatLon(searchValue)
+    //  console.log($('#search-value').val())
+
+     return
 })
+// localStorage.setItem('searchValue', searchValue)
 // document.getElementById("#searchTerm").value
 function getLatLon(userSearch){
 
@@ -82,36 +88,52 @@ function fiveDayForcast(lat,lon){
     return response.json();
     }).then(function(data){
         console.log(data);
+        
 
 for(var i = 1; i < data.daily.length-2; i++){
-    var weatherCard = document.createElement('div')
-    weatherCard.setAttribute('class','card')
+    var weatherCard = document.createElement('div');
+    weatherCard.setAttribute('class','card');
     
-    var currentDate = document.createElement('h3')
-    currentDate.textContent=moment.unix(data.daily[i].dt).format('(MM/DD/YYYY')
+    var fiveDayDate = document.createElement('h3');
+    fiveDayDate.textContent=moment.unix(data.daily[i].dt).format('(MM/DD/YYYY');
     
-    var currentTemp = document.createElement('h4')
-    currentTemp.textContent='temp:' + data.daily[i].temp.day + ' °F'
+    var fiveDayTemp = document.createElement('h4')
+    fiveDayTemp.textContent='temp:' + data.daily[i].temp.day + ' °F';
+    
+    
+    var fiveDayWind = document.createElement('h4')
+    fiveDayWind.textContent='Wind:' + data.daily[i].wind_speed +' MPH';
 
-    var currentWind = document.createElement('h4')
-    currentWind.textContent='Wind:' + data.daily[i].wind_speed +' MPH'
+    var fiveDayHumidity = document.createElement('h4');
+    fiveDayHumidity.textContent='Humidity:' + data.daily[i].humidity+ ' %';
+    
+    weatherCard.append(fiveDayDate,fiveDayTemp,fiveDayWind,fiveDayHumidity);
+    document.getElementById('fiveforecast').append(weatherCard);
 
-    var humidity = document.createElement('h4')
-    humidity.textContent='Humidity:' + data.daily[i].humidity+ ' %'
-    
-       
-        
-    
-    
-    weatherCard.append(currentDate,currentTemp,currentWind,humidity)
-        document.getElementById('fiveforecast').append(weatherCard)
+    var tempDaily = 'Temp '+data.daily[i].temp.day+' °F'
+    localStorage.setItem('tempDaily', tempDaily);
 
+  var windDaily = 'Wind '+data.daily[i].wind_speed +' MPH'
+  localStorage.setItem('windDaily', windDaily);
+
+var humidityDaily ='Humidity:' + data.daily[i].humidity+ ' %';
+  localStorage.setItem('humidityDaily', humidityDaily)
 
 }
+    
+
+ 
+document.getElementById('list-group').append($('#search-value').val())
+localStorage.setItem($('#search-value').val,$('#search-value').val())
 
 
+($('#search-value').val()(localStorage.getItem('#search-value').val()));
 
-          
+
+     
+
+
+       
     
     })
     };
