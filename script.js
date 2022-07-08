@@ -19,19 +19,27 @@ var lat;
 var lon;
 var searchValue;
 var savedButton = document.getElementById('#search-button');
+var searchHistory = JSON.parse(localStorage.getItem('cityList'))||[]
 $('#search-button').on('click', function(){
      searchValue = $('#search-value').val()
      console.log(searchValue)
+     
+    
      getLatLon(searchValue)
-    //  console.log($('#search-value').val())
-
+    
      return
 })
-// localStorage.setItem('searchValue', searchValue)
-// document.getElementById("#searchTerm").value
+
 function getLatLon(userSearch){
 
-fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`)
+if(searchHistory.indexOf(userSearch)=== -1){
+    searchHistory.push(userSearch)
+    localStorage.setItem('cityList',JSON.stringify(searchHistory));
+    $('#list-group').append('<li>'+'<a href="#"> '+ searchValue + '</a>'+'</li>')
+};
+document.getElementById('todayweather').innerHTML=''
+document.getElementById('fiveforecast').innerHTML=''
+    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`)
 .then(function(response){
     
     return response.json();
@@ -97,7 +105,7 @@ for(var i = 1; i < data.daily.length-2; i++){
     var fiveDayDate = document.createElement('h3');
     fiveDayDate.textContent=moment.unix(data.daily[i].dt).format('(MM/DD/YYYY');
     
-    var fiveDayTemp = document.createElement('h4')
+    var fiveDayTemp = document.createElement('h2')
     fiveDayTemp.textContent='temp:' + data.daily[i].temp.day + ' °F';
     
     
@@ -110,30 +118,22 @@ for(var i = 1; i < data.daily.length-2; i++){
     weatherCard.append(fiveDayDate,fiveDayTemp,fiveDayWind,fiveDayHumidity);
     document.getElementById('fiveforecast').append(weatherCard);
 
-    var tempDaily = 'Temp '+data.daily[i].temp.day+' °F'
-    localStorage.setItem('tempDaily', tempDaily);
-
-  var windDaily = 'Wind '+data.daily[i].wind_speed +' MPH'
-  localStorage.setItem('windDaily', windDaily);
-
-var humidityDaily ='Humidity:' + data.daily[i].humidity+ ' %';
-  localStorage.setItem('humidityDaily', humidityDaily)
+//   
 
 }
     
-
- 
-document.getElementById('list-group').append($('#search-value').val())
-localStorage.setItem($('#search-value').val,$('#search-value').val())
-
-
-($('#search-value').val()(localStorage.getItem('#search-value').val()));
-
-
-     
-
-
-       
-    
     })
     };
+    for(var i=0; i <searchHistory.length; i++){
+        $('#list-group').append('<li>'+'<a href="#"> '+ searchHistory[i] + '</a>'+'</li>')
+    }
+
+    
+
+function onPageLoad(){
+    getLatLon(searchHistory[searchHistory.length-1])
+    var searchValue = document.createElement('h2')
+searchValue.textContent=searchHistory[searchHistory.length-1]
+document.getElementById('todayweather').append(searchValue)
+}
+onPageLoad()
