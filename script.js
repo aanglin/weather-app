@@ -12,7 +12,7 @@
 var apiKey = '35d66511632e3718c5dcecf391dd5011'
 var userSearch = "Austin"
 var weatherAPIUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`
-var geoAPIurl=`http://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`
+var geoAPIurl=`https://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`
 //   var testUrl = `http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=${apiKey}`
 // Value from search form
 var lat;
@@ -40,7 +40,7 @@ if(searchHistory.indexOf(userSearch)=== -1){
 };
 document.getElementById('todayWeather').innerHTML=''
 document.getElementById('fiveForecast').innerHTML=''
-    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`)
+    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`)
 .then(function(response){
     
     return response.json();
