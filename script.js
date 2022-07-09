@@ -40,7 +40,7 @@ if(searchHistory.indexOf(userSearch)=== -1){
 };
 document.getElementById('todayWeather').innerHTML=''
 document.getElementById('fiveForecast').innerHTML=''
-    fetch(`https://api.openweathermap.org/geo/2.5/direct?q=${userSearch}&limit=5&appid=${apiKey}`)
+    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`)
 .then(function(response){
     
     return response.json();
