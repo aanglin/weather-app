@@ -11,7 +11,7 @@
 
 var apiKey = '35d66511632e3718c5dcecf391dd5011'
 var userSearch = "Austin"
-var weatherAPIUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`
+var weatherAPIUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
 var geoAPIurl=`https://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`
 //   var testUrl = `http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid=${apiKey}`
 // Value from search form
@@ -56,7 +56,7 @@ document.getElementById('fiveForecast').innerHTML=''
 };
 
 function currentForecast(lat,lon){
- fetch(weatherAPIUrl)
+ fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`)
 .then(function(response){
 return response.json();
 }).then(function(data){
@@ -67,24 +67,24 @@ weatherCard.setAttribute('class','card1')
 var searchValue = document.createElement('h2')
 searchValue.textContent=document.getElementById('search-value').value
 var currentDate = document.createElement('h3')
-currentDate.textContent=moment.unix(data.current.dt).format('(MM/DD/YYYY')
+currentDate.textContent=moment().format('(MM/DD/YYYY')
 
 var currentTemp = document.createElement('h3')
-currentTemp.textContent='temp:' + data.current.temp +'°F'
+currentTemp.textContent='temp:' + data.main.temp +'°F'
 
 var currentWind = document.createElement('h3')
-currentWind.textContent='wind' + data.current.wind_speed + ' MPH'
+currentWind.textContent='wind' + data.wind.speed + ' MPH'
 
 var humidity = document.createElement('h3')
-humidity.textContent='humidity' + data.current.humidity + ' %'
+humidity.textContent='humidity' + data.main.humidity + ' %'
 
-var currentUv = document.createElement('h3')
-currentUv.textContent='UV Index' +data.current.uvi
+// var currentUv = document.createElement('h3')
+// currentUv.textContent='UV Index' +data.current.uvi
    
     
 
 
-weatherCard.append(searchValue,currentDate,currentTemp,currentWind,humidity,currentUv)
+weatherCard.append(searchValue,currentDate,currentTemp,currentWind,humidity,)
     document.getElementById('todayWeather').append(weatherCard)
 })
 };
@@ -92,14 +92,14 @@ weatherCard.append(searchValue,currentDate,currentTemp,currentWind,humidity,curr
 
 
 function fiveDayForcast(lat,lon){
-     fetch(weatherAPIUrl)
+     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`)
     .then(function(response){
     return response.json();
     }).then(function(data){
         console.log(data);
         
 
-for(var i = 1; i < data.daily.length-2; i++){
+for(var i = 1; i<data.length-2; i++){
     var weatherCard = document.createElement('div');
     weatherCard.setAttribute('class','card');
     
@@ -141,3 +141,4 @@ for(var i = 1; i < data.daily.length-2; i++){
 
 // https://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}
 // https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial
+// currentDate.textContent=moment.unix(data.current.dt).format('(MM/DD/YYYY')

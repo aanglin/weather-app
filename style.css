@@ -14,7 +14,7 @@ body, html {
 
  .card1{
     border: solid black 2px;
-    color: whitesmoke
+    color: black;
 } 
 
 .card{
@@ -37,6 +37,6 @@ font-size: x-large;
 }
 
 #clear{
-    color: whitesmoke;
+    color: black;
     
 } 
