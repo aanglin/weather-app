@@ -36,9 +36,10 @@ if(searchHistory.indexOf(userSearch)=== -1){
     searchHistory.push(userSearch)
     localStorage.setItem('cityList',JSON.stringify(searchHistory));
     $('#list-group').append('<li>'+'<a href="#"> '+ searchValue + '</a>'+'</li>')
+    
 };
-document.getElementById('todayweather').innerHTML=''
-document.getElementById('fiveforecast').innerHTML=''
+document.getElementById('todayWeather').innerHTML=''
+document.getElementById('fiveForecast').innerHTML=''
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`)
 .then(function(response){
     
@@ -84,7 +85,7 @@ currentUv.textContent='UV Index' +data.current.uvi
 
 
 weatherCard.append(searchValue,currentDate,currentTemp,currentWind,humidity,currentUv)
-    document.getElementById('todayweather').append(weatherCard)
+    document.getElementById('todayWeather').append(weatherCard)
 })
 };
 
@@ -116,7 +117,7 @@ for(var i = 1; i < data.daily.length-2; i++){
     fiveDayHumidity.textContent='Humidity:' + data.daily[i].humidity+ ' %';
     
     weatherCard.append(fiveDayDate,fiveDayTemp,fiveDayWind,fiveDayHumidity);
-    document.getElementById('fiveforecast').append(weatherCard);
+    document.getElementById('fiveForecast').append(weatherCard);
 
 //   
 
@@ -129,11 +130,11 @@ for(var i = 1; i < data.daily.length-2; i++){
     }
 
     
-
-function onPageLoad(){
-    getLatLon(searchHistory[searchHistory.length-1])
-    var searchValue = document.createElement('h2')
-searchValue.textContent=searchHistory[searchHistory.length-1]
-document.getElementById('todayweather').append(searchValue)
-}
-onPageLoad()
+// This function displays the last city entered on load of page
+// function onPageLoad(){
+//     getLatLon(searchHistory[searchHistory.length-1])
+//     var searchValue = document.createElement('h2')
+// searchValue.textContent=searchHistory[searchHistory.length-1]
+// document.getElementById('todayWeather').append(searchValue)
+// }
+//  onPageLoad()

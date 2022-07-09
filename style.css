@@ -1,38 +1,35 @@
-body{
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center;
-    background-color: #696EE0;
+body,.aaOne,.card{
+   background-image: url("../weather-app/image/weather.jpeg"); 
+
 }
 
 #aa-color{
-    background-color: #696EE0 !important;
+    /* background-color: #696EE0 !important; */
     
 }
 
 .card1{
-    border: solid black 2px;
-    
-   
+    /* border: solid black 2px; */
+    color: whitesmoke
 }
 
 .card{
-background-color: #696EE0 !important;
+/* background-color: #696EE0 !important; */
 color: whitesmoke; 
+ width: fit-content; 
+border: solid black 2px;
  
 
 }
 
 #list-group{
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center;
 font-size: xx-large;
+/* background-image: url("../weather-app/image/weather.jpeg"); */
 
 }
 
 #todayweather{
-    background-color: #696EE0;
+     background-color: #696EE0; 
     color: white;
 }
 
