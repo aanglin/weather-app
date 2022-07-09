@@ -40,7 +40,7 @@ if(searchHistory.indexOf(userSearch)=== -1){
 };
 document.getElementById('todayWeather').innerHTML=''
 document.getElementById('fiveForecast').innerHTML=''
-    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}`)
+     fetch(geoAPIurl)
 .then(function(response){
     
     return response.json();
@@ -50,13 +50,13 @@ document.getElementById('fiveForecast').innerHTML=''
     console.log("lat",data[0].lat)
     console.log("lon",data[0].lon)
    
-    currentForecast(data[0].lat,data[0].lon);
+     currentForecast(data[0].lat,data[0].lon);
     fiveDayForcast(data[0].lat,data[0].lon);
 })
 };
 
 function currentForecast(lat,lon){
-fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude={part}&appid=${apiKey}&units=imperial`)
+ fetch(weatherAPIUrl)
 .then(function(response){
 return response.json();
 }).then(function(data){
@@ -92,7 +92,7 @@ weatherCard.append(searchValue,currentDate,currentTemp,currentWind,humidity,curr
 
 
 function fiveDayForcast(lat,lon){
-    fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude={part}&appid=${apiKey}&units=imperial`)
+     fetch(weatherAPIUrl)
     .then(function(response){
     return response.json();
     }).then(function(data){
@@ -119,7 +119,7 @@ for(var i = 1; i < data.daily.length-2; i++){
     weatherCard.append(fiveDayDate,fiveDayTemp,fiveDayWind,fiveDayHumidity);
     document.getElementById('fiveForecast').append(weatherCard);
 
-//   
+   
 
 }
     
@@ -140,3 +140,4 @@ for(var i = 1; i < data.daily.length-2; i++){
 //  onPageLoad()
 
 // https://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}
+// https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial

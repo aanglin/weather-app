@@ -1,20 +1,24 @@
-body,.aaOne,.card{
-   background-image: url("../weather-app/image/weather.jpeg"); 
+body, html {
+    height: 100%;
+    background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(11).webp");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 
-}
+  #search-button{
+   display: block;
+   margin: 0 auto;
+   
+  }
 
-#aa-color{
-    /* background-color: #696EE0 !important; */
-    
-}
-
-.card1{
-    /* border: solid black 2px; */
+ .card1{
+    border: solid black 2px;
     color: whitesmoke
-}
+} 
 
 .card{
-/* background-color: #696EE0 !important; */
+
 color: whitesmoke; 
  width: fit-content; 
 border: solid black 2px;
@@ -22,9 +26,8 @@ border: solid black 2px;
 
 }
 
-#list-group{
-font-size: xx-large;
-/* background-image: url("../weather-app/image/weather.jpeg"); */
+#list-group{ 
+font-size: x-large;
 
 }
 
@@ -36,4 +39,4 @@ font-size: xx-large;
 #clear{
     color: whitesmoke;
     
-}
+} 
