@@ -56,7 +56,7 @@ document.getElementById('fiveForecast').innerHTML=''
 };
 
 function currentForecast(lat,lon){
-fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude={part}&appid=${apiKey}&units=imperial`)
+fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude={part}&appid=${apiKey}&units=imperial`)
 .then(function(response){
 return response.json();
 }).then(function(data){
@@ -92,7 +92,7 @@ weatherCard.append(searchValue,currentDate,currentTemp,currentWind,humidity,curr
 
 
 function fiveDayForcast(lat,lon){
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude={part}&appid=${apiKey}&units=imperial`)
+    fetch(`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&exclude={part}&appid=${apiKey}&units=imperial`)
     .then(function(response){
     return response.json();
     }).then(function(data){
@@ -138,3 +138,5 @@ for(var i = 1; i < data.daily.length-2; i++){
 // document.getElementById('todayWeather').append(searchValue)
 // }
 //  onPageLoad()
+
+// https://api.openweathermap.org/geo/1.0/direct?q=${userSearch}&limit=5&appid=${apiKey}
